@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = "PTDB/*.{h,m}"
+  s.source_files = "DBTest/PTDB/*.{h,m}"
   s.frameworks = 'Foundation'
   s.dependency  "FMDB"
 end
