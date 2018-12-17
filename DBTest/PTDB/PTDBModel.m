@@ -101,6 +101,8 @@ static FMDatabaseQueue *_dataQueue;
             NSLog(@"插入：%@   %@",[self pt_primaryKey],success ? @"成功":@"失败");
         }];
         [db commit];
+        
+        NSLog(@"线程：%@ 队列：%@",[NSThread currentThread],dispatch_get_current_queue());
     }];
     [_dataQueue close];
 }

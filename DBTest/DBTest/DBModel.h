@@ -12,7 +12,6 @@
 @property (nonatomic, strong) NSString *idNumber;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *sex;
-
 @property (nonatomic, strong) NSString *age;
 
 + (DBModel *)modelWithName:(NSString *)name idNumber:(NSString *)idNumber;

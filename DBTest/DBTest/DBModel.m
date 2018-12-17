@@ -14,6 +14,10 @@
     return @"idNumber";
 }
 
++ (NSArray *)pt_newKeys{
+    return @[@"age"];
+}
+
 + (DBModel *)modelWithName:(NSString *)name idNumber:(NSString *)idNumber{
     DBModel *model = [DBModel new];
     model.name = name;

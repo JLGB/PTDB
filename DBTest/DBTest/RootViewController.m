@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, weak) UILabel *totalDataLabel;
 
+@property (nonatomic, assign) NSInteger addClickCount;
 @end
 
 @implementation RootViewController
@@ -21,9 +22,56 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _dataArray = [DBModel pt_queryObjectWithKey:[DBModel pt_primaryKey] offset:6 limit:5 ascending:YES];
+    _dataArray = [DBModel pt_queryObjectAll];
     self.tableView.tableFooterView = [UIView new];
 }
+
+
+#pragma mark - Click
+
+- (void)buttonClick:(UIButton *)button {
+    switch (button.tag) {
+        case 0://增加
+            [self addData];
+            break;
+        case 1://修改
+            [self updateData];
+            break;
+        case 2://删除
+            [self deleteData];
+            break;
+        default:
+            break;
+    }
+    _dataArray = [DBModel pt_queryObjectAll];
+    [self.tableView reloadData];
+}
+
+- (void)addData{
+    ++_addClickCount;
+    long long timestamp = [[NSDate date] timeIntervalSince1970] * 1000;
+    NSMutableArray *addModelArray = @[].mutableCopy;
+    for (NSInteger i = 0; i < 5; i++) {
+        DBModel *model = [DBModel modelWithName:[NSString stringWithFormat:@"%ld",i] idNumber:[NSString stringWithFormat:@"%lld",timestamp + i]];
+        model.age = [NSString stringWithFormat:@"%ld",_addClickCount];
+        [addModelArray addObject:model];
+    }
+    [DBModel pt_updateObjectArray:addModelArray];
+}
+
+- (void)updateData{
+    if (_dataArray.count == 0) return;
+    DBModel *model = _dataArray[0];
+    model.sex = model.sex.boolValue ? @"0" : @"1";
+    [DBModel pt_updateObjectArray:@[model]];
+}
+
+- (void)deleteData{
+    if (_dataArray.count == 0) return;
+    DBModel *model0 = _dataArray[0];
+    [DBModel pt_deleteObjectWithPrimaryKeyArray:@[model0.idNumber]];
+}
+
 
 #pragma mark - Table view data source
 
@@ -36,8 +84,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DBModel *model = _dataArray[indexPath.row];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-    cell.textLabel.text = model.name;
-    cell.detailTextLabel.text = model.idNumber;
+    cell.textLabel.text = [NSString stringWithFormat:@"ID:%@",model.idNumber];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"age:%@",model.age];
     cell.backgroundColor = model.sex.boolValue ? UIColor.orangeColor : UIColor.whiteColor;
     cell.textLabel.textColor = model.sex.boolValue ? UIColor.whiteColor : UIColor.blackColor;
     
@@ -57,48 +105,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 100.f;
-}
-
-#pragma mark - Click
-
-- (void)buttonClick:(UIButton *)button {
-    switch (button.tag) {
-        case 0://增加
-        {
-            long long timestamp = [[NSDate date] timeIntervalSince1970] * 1000;
-            NSMutableArray *addModelArray = @[].mutableCopy;
-            for (NSInteger i = 0; i < 5; i++) {
-                DBModel *model = [DBModel modelWithName:[NSString stringWithFormat:@"%ld",i] idNumber:[NSString stringWithFormat:@"%lld",timestamp + i]];
-                [addModelArray addObject:model];
-            }
-            [DBModel pt_updateObjectArray:addModelArray];
-            
-        }
-            break;
-        case 1://修改
-        {
-            if (_dataArray.count >= 2) {
-                DBModel *model0 = _dataArray[0];
-                model0.sex = model0.sex.boolValue ? @"0" : @"1";
-                DBModel *model1 = _dataArray[1];
-                model1.sex = model1.sex.boolValue ? @"0" : @"1";
-                
-                [DBModel pt_updateObjectArray:@[model0,model1]];
-            }
-        }
-            break;
-        case 2://删除
-            if (_dataArray.count) {
-                DBModel *model0 = _dataArray[0];
-                [DBModel pt_deleteObjectWithPrimaryKeyArray:@[model0.idNumber]];
-            }
-            break;
-            
-        default:
-            break;
-    }
-    _dataArray = [DBModel pt_queryObjectAll];
-    [self.tableView reloadData];
 }
 
 
