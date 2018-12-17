@@ -147,6 +147,14 @@ static FMDatabaseQueue *_dataQueue;
     return array;
 }
 
++ (NSArray *)pt_queryObjectWithKey:(NSString *)key offset:(NSInteger)offset limit:(NSInteger)limit ascending:(BOOL)ascending{
+    [self setupTable];
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ order by %@ %@ limit %ld,%ld",[self t_name],key,ascending ? @"asc" : @"desc",offset,limit];
+    NSArray *array = [self executeQuerySql:sql];
+    [_dataQueue close];
+    return array;
+}
+
 + (instancetype)pt_queryObjectWithPrimaryKey:primaryKey{
     NSArray *array = [self pt_queryObjectWithKey:[self pt_primaryKey] value:primaryKey];
     return array.count ? array.firstObject : nil;

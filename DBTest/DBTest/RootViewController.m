@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _dataArray = [DBModel pt_queryObjectAll];
+    _dataArray = [DBModel pt_queryObjectWithKey:[DBModel pt_primaryKey] offset:6 limit:5 ascending:YES];
     self.tableView.tableFooterView = [UIView new];
 }
 

@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name             = 'PTDB'
   s.version          = '0.0.3'
-  s.summary          = '数据库，核心基于FMDB，以对象方式来直接操作数据库，简略了数据库的操作，开发者只需要关心数据的存取，不必为数据存储的分配担心.'
+  s.summary          = '以对象的方式来操作数据库'
 
   s.description      = <<-DESC
-非常简单的一个数据库操作工具
+数据库，核心基于FMDB，以对象方式来直接操作数据库，简略了数据库的操作，开发者只需要关心数据的存取，不必为数据存储的分配担心.
                        DESC
 
   s.homepage         = 'https://github.com/JLGB'

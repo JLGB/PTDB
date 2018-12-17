@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray *)pt_queryObjectAll;
 + (instancetype)pt_queryObjectWithPrimaryKey:primaryKey;
 + (NSArray *)pt_queryObjectWithKey:(NSString *)key value:(NSString *)value;
++ (NSArray *)pt_queryObjectWithKey:(NSString *)key offset:(NSInteger)offset limit:(NSInteger)limit ascending:(BOOL)ascending;
 @end
 
 NS_ASSUME_NONNULL_END
