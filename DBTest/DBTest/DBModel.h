@@ -11,11 +11,9 @@
 @interface DBModel : PTDBModel
 @property (nonatomic, strong) NSString *idNumber;
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *age;
 @property (nonatomic, strong) NSString *sex;
-@property (nonatomic, strong) NSString *country;
-@property (nonatomic, strong) NSString *borthday;
-@property (nonatomic, strong) NSString *fater;
-@property (nonatomic, strong) NSString *mother;
-@property (nonatomic, strong) NSString *address;
+
+@property (nonatomic, strong) NSString *age;
+
++ (DBModel *)modelWithName:(NSString *)name idNumber:(NSString *)idNumber;
 @end

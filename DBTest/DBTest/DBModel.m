@@ -14,4 +14,11 @@
     return @"idNumber";
 }
 
++ (DBModel *)modelWithName:(NSString *)name idNumber:(NSString *)idNumber{
+    DBModel *model = [DBModel new];
+    model.name = name;
+    model.idNumber = idNumber;
+    return model;
+}
+
 @end

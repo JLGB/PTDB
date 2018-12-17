@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#define LS(localized) (NSLocalizedString(localized, nil))
+#import "RootViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +20,11 @@
     // Override point for customization after application launch.
     
     
-    NSLog(@"%@",LS(@"hello shell"));
+    _window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    _window.backgroundColor = UIColor.whiteColor;
+    [_window makeKeyAndVisible];
+    _window.rootViewController = [RootViewController new];
+    
     
     return YES;
 }

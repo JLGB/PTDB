@@ -55,7 +55,7 @@ static FMDatabaseQueue *_dataQueue;
             
             NSString *sql = [NSString stringWithFormat:@"create table if not exists %@ (%@);",t_name,keysString];
             [db executeUpdate:sql];
-            
+        }else{
             /*** if add new key to table,just do like this */
             for (NSString *key in [self pt_newKeys]) {
                 if (![db columnExists:key inTableWithName:t_name]) {
@@ -68,11 +68,7 @@ static FMDatabaseQueue *_dataQueue;
 }
 
 
-+ (void)pt_updateObjectArray:(NSArray *)array completion:(void(^)(BOOL success,NSError *error))completion{
-    
-    if (array.count == 0 && completion == nil) return;
-    if (array.count == 0 && completion) { completion(YES,nil); return;}
-    
++ (void)pt_updateObjectArray:(NSArray<PTDBModel *> *)array{
     [self setupTable];
     [_dataQueue inDatabase:^(FMDatabase * _Nonnull db) {
         [db beginTransaction];
@@ -106,17 +102,30 @@ static FMDatabaseQueue *_dataQueue;
         }];
         [db commit];
     }];
-    
     [_dataQueue close];
-    completion(YES,nil);
 }
 
-+ (void)pt_deleteObjectWithPrimaryValue:(NSString *)primaryValue{
++ (void)pt_deleteObjectWithPrimaryKey:primaryKey{
     [self setupTable];
-    NSString *sql = [NSString stringWithFormat:@"delete from %@ where %@ in ('%@');",[self t_name],[self pt_primaryKey],primaryValue];
+    NSString *sql = [NSString stringWithFormat:@"delete from %@ where %@ in ('%@');",[self t_name],[self pt_primaryKey],primaryKey];
     [_dataQueue inDatabase:^(FMDatabase * _Nonnull db) {
         BOOL success = [db executeUpdate:sql];
-        NSLog(@"删除：%@：%@  %@",[self pt_primaryKey],primaryValue,success ? @"成功":@"失败");
+        NSLog(@"删除：%@：%@  %@",[self pt_primaryKey],primaryKey,success ? @"成功":@"失败");
+    }];
+    [_dataQueue close];
+}
+
++ (void)pt_deleteObjectWithPrimaryKeyArray:(NSArray<NSString *> *)array{
+    [self setupTable];
+    NSMutableString *tempValueCondition = @"".mutableCopy;
+    for (NSString *value in array) {
+        [tempValueCondition appendFormat:@"'%@',",value];
+    }
+    NSString *valueCondition = [tempValueCondition substringWithRange:NSMakeRange(0, tempValueCondition.length-1)];
+    NSString *sql = [NSString stringWithFormat:@"delete from %@ where %@ in (%@);",[self t_name],[self pt_primaryKey],valueCondition];
+    [_dataQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        BOOL success = [db executeUpdate:sql];
+        NSLog(@"删除：%@：%@  %@",[self pt_primaryKey],valueCondition,success ? @"成功":@"失败");
     }];
     [_dataQueue close];
 }
@@ -138,8 +147,8 @@ static FMDatabaseQueue *_dataQueue;
     return array;
 }
 
-+ (instancetype)pt_queryObjectWithPrimaryValue:(NSString *)primaryValue{
-    NSArray *array = [self pt_queryObjectWithKey:[self pt_primaryKey] value:primaryValue];
++ (instancetype)pt_queryObjectWithPrimaryKey:primaryKey{
+    NSArray *array = [self pt_queryObjectWithKey:[self pt_primaryKey] value:primaryKey];
     return array.count ? array.firstObject : nil;
 }
 
@@ -150,9 +159,6 @@ static FMDatabaseQueue *_dataQueue;
     [_dataQueue close];
     return array;
 }
-
-
-
 #pragma mark - Private
 
 + (NSArray *)executeQueryKey:(NSString *)key value:(NSString *)value{

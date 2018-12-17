@@ -2,21 +2,17 @@ PODS:
   - FMDB (2.7.2):
     - FMDB/standard (= 2.7.2)
   - FMDB/standard (2.7.2)
-  - MJExtension (3.0.15.1)
 
 DEPENDENCIES:
   - FMDB
-  - MJExtension
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - FMDB
-    - MJExtension
 
 SPEC CHECKSUMS:
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
-  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
 
-PODFILE CHECKSUM: 023d35f813c739b6366f39d33d9d31d99356bab6
+PODFILE CHECKSUM: a7e00bc542bcd2147ddf2067f0a5df9f28178f2c
 
 COCOAPODS: 1.5.0
