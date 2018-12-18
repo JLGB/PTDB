@@ -42,7 +42,7 @@ pod 'PTDB'
 @end
 ``` 
 
-- 3.使用
+- 3.增删改查
 
 ```
 3.1 增、改数据
@@ -65,7 +65,7 @@ pod 'PTDB'
 //修改
 - (void)updateData{
     PersonDBModel *model = _dataArray[0];
-    model.sex = model.sex.boolValue ? @"0" : @"1";
+    model.gender = model.gender.boolValue ? @"0" : @"1";
     [PersonDBModel pt_updateObjectArray:@[model]];
 }
 

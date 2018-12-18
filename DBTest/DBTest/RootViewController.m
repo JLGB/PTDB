@@ -63,7 +63,7 @@
 - (void)updateData{
     if (_dataArray.count == 0) return;
     PersonDBModel *model = _dataArray[0];
-    model.sex = model.sex.boolValue ? @"0" : @"1";
+    model.gender = model.gender.boolValue ? @"0" : @"1";
     [PersonDBModel pt_updateObjectArray:@[model]];
 }
 
@@ -87,8 +87,8 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     cell.textLabel.text = [NSString stringWithFormat:@"ID:%@",model.idNumber];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"age:%@",model.age];
-    cell.backgroundColor = model.sex.boolValue ? UIColor.orangeColor : UIColor.whiteColor;
-    cell.textLabel.textColor = model.sex.boolValue ? UIColor.whiteColor : UIColor.blackColor;
+    cell.backgroundColor = model.gender.boolValue ? UIColor.orangeColor : UIColor.whiteColor;
+    cell.textLabel.textColor = model.gender.boolValue ? UIColor.whiteColor : UIColor.blackColor;
     
     return cell;
 }
