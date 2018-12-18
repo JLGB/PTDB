@@ -1,10 +1,10 @@
-# PTDB ###
-###【安装】###
+# PTDB
+##【安装】
         pod 'PTDB'
 
-###【使用示列】###
+##【使用示列】
 
-1.模型对象继承 PTDBModel，*模型对象的属性必须全是string类型*
+- 1.模型对象继承 PTDBModel，*模型对象的属性必须全是string类型*
 
 ``` 
 @interface PersonModel : PTDBModel
@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSString *name;
 @end 
 ```
-2.配置 模型对象
+- 2.配置 模型对象
 
 ``` 
 #import "PersonDBModel.h"
@@ -40,7 +40,7 @@
 @end
 ``` 
 
-3.使用
+- 3.使用
 
 ```
 3.1 增、改数据
