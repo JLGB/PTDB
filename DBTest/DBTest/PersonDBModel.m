@@ -6,20 +6,20 @@
 //  Copyright © 2018年 HangZhouSciener. All rights reserved.
 //
 
-#import "DBModel.h"
+#import "PersonDBModel.h"
 
-@implementation DBModel
+@implementation PersonDBModel
 
 + (NSString *)pt_primaryKey{
     return @"idNumber";
 }
 
-+ (NSArray *)pt_newKeys{
++ (NSArray *)pt_newKeyArray{
     return @[@"age"];
 }
 
-+ (DBModel *)modelWithName:(NSString *)name idNumber:(NSString *)idNumber{
-    DBModel *model = [DBModel new];
++ (PersonDBModel *)modelWithName:(NSString *)name idNumber:(NSString *)idNumber{
+    PersonDBModel *model = [PersonDBModel new];
     model.name = name;
     model.idNumber = idNumber;
     return model;

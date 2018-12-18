@@ -20,7 +20,7 @@ static FMDatabaseQueue *_dataQueue;
 
 + (NSString *)pt_primaryKey{return nil;}
 
-+ (NSArray *)pt_newKeys{
++ (NSArray *)pt_newKeyArray{
     return nil;
 }
 
@@ -57,7 +57,7 @@ static FMDatabaseQueue *_dataQueue;
             [db executeUpdate:sql];
         }else{
             /*** if add new key to table,just do like this */
-            for (NSString *key in [self pt_newKeys]) {
+            for (NSString *key in [self pt_newKeyArray]) {
                 if (![db columnExists:key inTableWithName:t_name]) {
                     NSString *alterSql = [NSString stringWithFormat:@"alter table %@ add %@ text",t_name,key];
                     [db executeUpdate:alterSql];
@@ -142,14 +142,14 @@ static FMDatabaseQueue *_dataQueue;
     [_dataQueue close];
 }
 
-+ (NSArray *)pt_queryObjectWithKey:(NSString *)key value:(NSString *)value{
++ (NSArray *)pt_fetchObjectWithKey:(NSString *)key value:(NSString *)value{
     [self setupTable];
     NSArray *array = [self executeQueryKey:key value:value];
     [_dataQueue close];
     return array;
 }
 
-+ (NSArray *)pt_queryObjectWithKey:(NSString *)key offset:(NSInteger)offset limit:(NSInteger)limit ascending:(BOOL)ascending{
++ (NSArray *)pt_fetchObjectWithKey:(NSString *)key offset:(NSInteger)offset limit:(NSInteger)limit ascending:(BOOL)ascending{
     [self setupTable];
     NSString *sql = [NSString stringWithFormat:@"select * from %@ order by %@ %@ limit %ld,%ld",[self t_name],key,ascending ? @"asc" : @"desc",offset,limit];
     NSArray *array = [self executeQuerySql:sql];
@@ -157,12 +157,12 @@ static FMDatabaseQueue *_dataQueue;
     return array;
 }
 
-+ (instancetype)pt_queryObjectWithPrimaryKey:primaryKey{
-    NSArray *array = [self pt_queryObjectWithKey:[self pt_primaryKey] value:primaryKey];
++ (instancetype)pt_fetchObjectWithPrimaryKey:(NSString *)primaryKey{
+    NSArray *array = [self pt_fetchObjectWithKey:[self pt_primaryKey] value:primaryKey];
     return array.count ? array.firstObject : nil;
 }
 
-+ (NSArray *)pt_queryObjectAll{
++ (NSArray *)pt_fetchObjectAll{
     [self setupTable];
     NSString *sql = [NSString stringWithFormat:@"select * from %@",[self t_name]];
     NSArray *array = [self executeQuerySql:sql];

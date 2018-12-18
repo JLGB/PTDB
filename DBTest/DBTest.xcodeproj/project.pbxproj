@@ -12,7 +12,7 @@
 		4F5C639F20D0CE7E00DD475A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F5C639E20D0CE7E00DD475A /* Assets.xcassets */; };
 		4F5C63A220D0CE7E00DD475A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5C63A020D0CE7E00DD475A /* LaunchScreen.storyboard */; };
 		4F5C63A520D0CE7E00DD475A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5C63A420D0CE7E00DD475A /* main.m */; };
-		4F5C63B020D0CF4500DD475A /* DBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5C63AF20D0CF4500DD475A /* DBModel.m */; };
+		4F5C63B020D0CF4500DD475A /* PersonDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5C63AF20D0CF4500DD475A /* PersonDBModel.m */; };
 		4F6A94F0216B01DE007CFE08 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F6A94EF216B01DE007CFE08 /* Localizable.strings */; };
 		4FAA104221C24804004B0C8C /* PTDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FAA104021C24804004B0C8C /* PTDBModel.m */; };
 		6104752C8203984FBD7C8786 /* libPods-DBTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A74F1DCA47F328BE8A7A168 /* libPods-DBTest.a */; };
@@ -28,8 +28,8 @@
 		4F5C639E20D0CE7E00DD475A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F5C63A120D0CE7E00DD475A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F5C63A420D0CE7E00DD475A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4F5C63AE20D0CF4500DD475A /* DBModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBModel.h; sourceTree = "<group>"; };
-		4F5C63AF20D0CF4500DD475A /* DBModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DBModel.m; sourceTree = "<group>"; };
+		4F5C63AE20D0CF4500DD475A /* PersonDBModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonDBModel.h; sourceTree = "<group>"; };
+		4F5C63AF20D0CF4500DD475A /* PersonDBModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonDBModel.m; sourceTree = "<group>"; };
 		4F6A94E0216AFFA3007CFE08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
 		4F6A94EF216B01DE007CFE08 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		4FAA103F21C24804004B0C8C /* PTDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTDBModel.h; sourceTree = "<group>"; };
@@ -77,8 +77,8 @@
 				4F5C639620D0CE7D00DD475A /* AppDelegate.m */,
 				4F099F3921C733AB00177DCA /* RootViewController.h */,
 				4F099F3A21C733AB00177DCA /* RootViewController.m */,
-				4F5C63AE20D0CF4500DD475A /* DBModel.h */,
-				4F5C63AF20D0CF4500DD475A /* DBModel.m */,
+				4F5C63AE20D0CF4500DD475A /* PersonDBModel.h */,
+				4F5C63AF20D0CF4500DD475A /* PersonDBModel.m */,
 				4F5C639E20D0CE7E00DD475A /* Assets.xcassets */,
 				4F5C63A020D0CE7E00DD475A /* LaunchScreen.storyboard */,
 				4F6A94DF216AFF9F007CFE08 /* Info.plist */,
@@ -207,7 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F5C63B020D0CF4500DD475A /* DBModel.m in Sources */,
+				4F5C63B020D0CF4500DD475A /* PersonDBModel.m in Sources */,
 				4F5C63A520D0CE7E00DD475A /* main.m in Sources */,
 				4F5C639720D0CE7D00DD475A /* AppDelegate.m in Sources */,
 				4FAA104221C24804004B0C8C /* PTDBModel.m in Sources */,

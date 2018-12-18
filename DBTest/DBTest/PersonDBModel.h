@@ -8,11 +8,11 @@
 
 #import "PTDB.h"
 
-@interface DBModel : PTDBModel
+@interface PersonDBModel : PTDBModel
 @property (nonatomic, strong) NSString *idNumber;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *sex;
 @property (nonatomic, strong) NSString *age;
 
-+ (DBModel *)modelWithName:(NSString *)name idNumber:(NSString *)idNumber;
++ (PersonDBModel *)modelWithName:(NSString *)name idNumber:(NSString *)idNumber;
 @end

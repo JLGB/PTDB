@@ -7,7 +7,7 @@
 //
 
 #import "RootViewController.h"
-#import "DBModel.h"
+#import "PersonDBModel.h"
 
 @interface RootViewController ()
 @property (nonatomic, strong) NSArray *dataArray;
@@ -22,7 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _dataArray = [DBModel pt_queryObjectAll];
+    //查找所有人
+    _dataArray = [PersonDBModel pt_fetchObjectAll];
     self.tableView.tableFooterView = [UIView new];
 }
 
@@ -43,7 +44,7 @@
         default:
             break;
     }
-    _dataArray = [DBModel pt_queryObjectAll];
+    _dataArray = [PersonDBModel pt_fetchObjectAll];
     [self.tableView reloadData];
 }
 
@@ -52,24 +53,24 @@
     long long timestamp = [[NSDate date] timeIntervalSince1970] * 1000;
     NSMutableArray *addModelArray = @[].mutableCopy;
     for (NSInteger i = 0; i < 5; i++) {
-        DBModel *model = [DBModel modelWithName:[NSString stringWithFormat:@"%ld",i] idNumber:[NSString stringWithFormat:@"%lld",timestamp + i]];
+        PersonDBModel *model = [PersonDBModel modelWithName:[NSString stringWithFormat:@"%ld",i] idNumber:[NSString stringWithFormat:@"%lld",timestamp + i]];
         model.age = [NSString stringWithFormat:@"%ld",_addClickCount];
         [addModelArray addObject:model];
     }
-    [DBModel pt_updateObjectArray:addModelArray];
+    [PersonDBModel pt_updateObjectArray:addModelArray];
 }
 
 - (void)updateData{
     if (_dataArray.count == 0) return;
-    DBModel *model = _dataArray[0];
+    PersonDBModel *model = _dataArray[0];
     model.sex = model.sex.boolValue ? @"0" : @"1";
-    [DBModel pt_updateObjectArray:@[model]];
+    [PersonDBModel pt_updateObjectArray:@[model]];
 }
 
 - (void)deleteData{
     if (_dataArray.count == 0) return;
-    DBModel *model0 = _dataArray[0];
-    [DBModel pt_deleteObjectWithPrimaryKeyArray:@[model0.idNumber]];
+    PersonDBModel *model0 = _dataArray[0];
+    [PersonDBModel pt_deleteObjectWithPrimaryKeyArray:@[model0.idNumber]];
 }
 
 
@@ -82,7 +83,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DBModel *model = _dataArray[indexPath.row];
+    PersonDBModel *model = _dataArray[indexPath.row];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     cell.textLabel.text = [NSString stringWithFormat:@"ID:%@",model.idNumber];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"age:%@",model.age];
