@@ -18,7 +18,10 @@ static FMDatabaseQueue *_dataQueue;
     return [NSString stringWithFormat:@"t_%@",NSStringFromClass(self)];
 }
 
-+ (NSString *)pt_primaryKey{return nil;}
++ (NSString *)pt_primaryKey{
+    NSAssert(false, @"子类必须重写该方法，选择子类的一个属性字段 作为主键返回");
+    return nil;
+}
 
 + (NSArray *)pt_newKeyArray{
     return nil;
