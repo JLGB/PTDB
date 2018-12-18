@@ -1,8 +1,9 @@
-# PTDB
-###【安装】
+# PTDB ###
+###【安装】###
         pod 'PTDB'
 
-###【使用示列】
+###【使用示列】###
+
 1.模型对象继承 PTDBModel，*模型对象的属性必须全是string类型*
 
 ``` 
@@ -18,6 +19,7 @@
 #import "PersonDBModel.h"
 
 @implementation PersonDBModel
+
 /*
  *必须
  *重写父类的该方法，返回模型的一个属性 作为表字段的主键
