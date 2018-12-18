@@ -25,7 +25,7 @@ pod 'PTDB'
 /*
  *必须
  *重写父类的该方法，返回模型的一个属性 作为表字段的主键
- *如 idNumber 字段表示PersonDBModel的唯一值，所有的模型实例的该值都不可能重复
+ *如 idNumber 字段表示PersonDBModel的唯一值，即该模型所有实例的idNumber都不可能重复
  */
 + (NSString *)pt_primaryKey{
     return @"idNumber";
@@ -89,8 +89,8 @@ pod 'PTDB'
     
     //查找所有人
     _dataArray = [PersonDBModel pt_fetchObjectAll];
-    //查找所有名字为 jack 的人
     
+    //查找所有名字为 jack 的人
     _dataArray = [PersonDBModel pt_fetchObjectWithKey:@"name" value:@"jack"];
     
     //查找 以年龄为排序 以升序的方式 从第0位开始 取前20条数据
